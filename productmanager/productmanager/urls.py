@@ -18,9 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from api.constants import API_VERSION
+from api.constants import API_VERSION_MAJOR
 
 urlpatterns = [
-    path(f"api/v{API_VERSION}/", include("api.urls")),
+    path(f"api/v{API_VERSION_MAJOR}/", include("api.urls")),
     path("admin/", admin.site.urls),
 ]

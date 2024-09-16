@@ -9,13 +9,14 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Product
+from .constants import API_VERSION
 
 
 def index(_):
     return JsonResponse(
         {
             "message": "Welcome to the Product Manager API",
-            "version": "1.0",
+            "version": API_VERSION,
             "endpoints": {
                 "/products": {
                     "GET": "Get list of all existing products",
