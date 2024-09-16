@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: Product API
+  description: API for managing products
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+paths:
+  /products:
+    get:
+      summary: Retrieve a list of products
+      responses:
+        '200':
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "Product Name"
+                    description:
+                      type: string
+                      example: "Product Description"
+                    price:
+                      type: number
+                      format: float
+                      example: 19.99
+    post:
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "New Product"
+                description:
+                  type: string
+                  example: "Description of the new product"
+                price:
+                  type: number
+                  format: float
+                  example: 29.99
+      responses:
+        '201':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+                  name:
+                    type: string
+                    example: "New Product"
+                  description:
+                    type: string
+                    example: "Description of the new product"
+                  price:
+                    type: number
+                    format: float
+                    example: 29.99
+        '400':
+          description: Bad request (e.g., validation errors)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Price must be a positive number."
+                    
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Product Name"
+        description:
+          type: string
+          example: "Product Description"
+        price:
+          type: number
+          format: float
+          example: 19.99
+
+    ProductInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "New Product"
+        description:
+          type: string
+          example: "Description of the new product"
+        price:
+          type: number
+          format: float
+          example: 29.99
