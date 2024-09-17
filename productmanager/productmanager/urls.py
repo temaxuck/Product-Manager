@@ -22,5 +22,6 @@ from api.constants import API_VERSION_MAJOR
 
 urlpatterns = [
     path(f"api/v{API_VERSION_MAJOR}/", include("api.urls")),
+    path(f"", include("app.urls")),
     path("admin/", admin.site.urls),
 ]

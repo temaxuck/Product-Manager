@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Product
 from .constants import API_VERSION
+from .forms import ProductForm
 
 
 def index(_):
@@ -39,17 +40,14 @@ class ProductsView(View):
 
     def post(self, request):
         data = json.loads(request.body)
-        product = Product(
-            name=data["name"],
-            description=data["description"],
-            price=Decimal(str(data["price"])),
-        )
+        form = ProductForm(data)
 
-        try:
-            product.full_clean()
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.price = Decimal(str(data["price"]))
             product.save()
             return JsonResponse(
                 {**model_to_dict(product), "price": float(product.price)},
             )
-        except ValidationError as e:
-            return JsonResponse({"errors": e.message_dict}, status=400)
+        else:
+            return JsonResponse({"errors": form.errors}, status=400)
