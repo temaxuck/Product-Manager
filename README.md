@@ -20,24 +20,18 @@ $ git clone git@github.com:temaxuck/Brendwall-Technical-Assessment.git
 $ cd Brendwall-Technical-Assessment
 ```
 
-### Installation
-
-The project is provided as python package. Install it via **pip**:
-
-```console
-$ pip install .
-```
-
-Also to create the migrated sqlite database run:
-
-```console
-$ productmanager migrate
-```
-
 ### Run the server
+Before you run the server you have to ensure the migrated sqlite database exists.
+Simply run (this will automatically create sqlite database and apply migrations for it):
 
 ```console
-$ productmanager runserver
+$ python3 manage.py migrate
+```
+
+Now you are able to run the server:
+
+```console
+$ python3 manage.py runserver
 ```
 
 Finally, just open http://localhost:8000/.
