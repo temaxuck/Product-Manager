@@ -1,4 +1,4 @@
-# Brendwall-Technical-Assessment
+# Product-Manager
 
 This is a interview assignment for the Python Django developer at Brendwall.
 
